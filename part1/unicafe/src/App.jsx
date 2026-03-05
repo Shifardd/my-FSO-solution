@@ -1,38 +1,38 @@
 import { useState } from "react";
 
 const App = () => {
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  const [all, setAll] = useState(0)
-  const [average, setAverage] = useState(0)
-  const [positive, setPositive] = useState(0)
+  const [all, setAll] = useState(0);
+  const [average, setAverage] = useState(0);
+  const [positive, setPositive] = useState(0);
 
   const handleGood = () => {
-    let updatedGood = good + 1
-    setGood(updatedGood)
-    let updatedTotal = updatedGood + neutral + bad 
-    setAll(updatedTotal)
-    setAverage((updatedGood - bad)/updatedTotal)
-    setPositive(updatedGood / updatedTotal * 100)
+    let updatedGood = good + 1;
+    setGood(updatedGood);
+    let updatedTotal = updatedGood + neutral + bad;
+    setAll(updatedTotal);
+    setAverage((updatedGood - bad) / updatedTotal);
+    setPositive(updatedGood / updatedTotal * 100);
   }
     
   const handleNeutral = () => {
-    let updatedNeutral = neutral + 1
-    setNeutral(updatedNeutral)
-    let updatedTotal = good + updatedNeutral + bad 
-    setAll(good + updatedNeutral + bad)
-    setAverage((good - bad)/updatedTotal)
-    setPositive(good / updatedTotal * 100)
+    let updatedNeutral = neutral + 1;
+    setNeutral(updatedNeutral);
+    let updatedTotal = good + updatedNeutral + bad;
+    setAll(good + updatedNeutral + bad);
+    setAverage((good - bad) / updatedTotal);
+    setPositive(good / updatedTotal * 100);
   }
   const handleBad = () => {
-    let updatedBad = bad + 1
-    setBad(updatedBad)
-    let updatedTotal = good + neutral + updatedBad
-    setAll(good + neutral + updatedBad)
-    setAverage((good - updatedBad)/updatedTotal)
-    setPositive(good / updatedTotal * 100)
+    let updatedBad = bad + 1;
+    setBad(updatedBad);
+    let updatedTotal = good + neutral + updatedBad;
+    setAll(good + neutral + updatedBad);
+    setAverage((good - updatedBad) / updatedTotal);
+    setPositive(good / updatedTotal * 100);
   }
 
 
@@ -42,14 +42,22 @@ const App = () => {
       <Button onClick={handleGood} text="Good" />
       <Button onClick={handleNeutral} text="Neutral" />
       <Button onClick={handleBad} text="Bad" />
-      <SubTitle title="statistics" />
-      <TheValue name="good" value={good} />
-      <TheValue name="neutral" value={neutral} />
-      <TheValue name="bad" value={bad} />
-      <p>all {all}</p>
-      <p>average {average}</p>
-      <p>positive {positive}%</p>
+      <Statistics name= "statistics" good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive} />
     </div>
+  )
+}
+
+const Statistics = (props) => {
+  return (
+    <>
+      <h2>{props.name}</h2>
+      <p>good {props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {props.all}</p>
+      <p>average {props.average}</p>
+      <p>positive {props.positive}%</p>
+    </>
   )
 }
 
