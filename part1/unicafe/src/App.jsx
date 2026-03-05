@@ -85,10 +85,5 @@ const Button = ({onClick, text}) => {
   )
 }
 
-const TheValue = ({name, value}) => {
-  return (
-    <p>{name} {value}</p>
-  )
-}
 
 export default App
