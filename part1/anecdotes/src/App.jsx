@@ -30,17 +30,7 @@ const App = () => {
     console.log(newVote);
   }
 
-  let mostVote = () => {
-    let index = 0;
-    let most = 0;
-    for(let i = 0; i < vote.length; i++) {
-      if (vote[i] >= most) {
-        most = vote[i];
-        index = i;
-      }
-    }
-    return index;
-  }
+  let mostVote = vote.indexOf(Math.max(...vote))
   
   return (
     <div>
@@ -52,7 +42,7 @@ const App = () => {
 
       <h2>Anecdote with most votes</h2>
       <div>
-        {anecdotes[mostVote()]}
+        {anecdotes[mostVote]}
       </div>
     </div>
   )
@@ -65,5 +55,5 @@ const Button = ({onClick, text}) => {
     </button>
   )
 }
-  
+
 export default App
