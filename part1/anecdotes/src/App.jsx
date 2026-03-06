@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 const App = () => {
+
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -27,15 +28,32 @@ const App = () => {
     newVote[selected]+=1;
     setVote(newVote);   
     console.log(newVote);
-     
   }
 
+  let mostVote = () => {
+    let index = 0;
+    let most = 0;
+    for(let i = 0; i < vote.length; i++) {
+      if (vote[i] >= most) {
+        most = vote[i];
+        index = i;
+      }
+    }
+    return index;
+  }
+  
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <div>has {vote[selected]} votes</div>
       <Button onClick = {updateVote} text = "vote" />
       <Button onClick = {handleNextAnecdote} text = "next anecdote" />
+
+      <h2>Anecdote with most votes</h2>
+      <div>
+        {anecdotes[mostVote()]}
+      </div>
     </div>
   )
 }
@@ -47,5 +65,5 @@ const Button = ({onClick, text}) => {
     </button>
   )
 }
-
+  
 export default App
