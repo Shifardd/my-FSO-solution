@@ -19,14 +19,14 @@ const App = () => {
     }
   } 
 
-
   return (
     <div>
       <SubTitle title="give feedback" />
       <Button onClick={handleClicks("good")} text="Good" />
       <Button onClick={handleClicks("neutral")} text="Neutral" />
       <Button onClick={handleClicks("bad")} text="Bad" />
-      <Statistics name="statistics" good={good} neutral={neutral} bad={bad} all={total} average={average} positive={positive} />
+      <SubTitle title="statistics" />
+      <Statistics good={good} neutral={neutral} bad={bad} all={total} average={average} positive={positive} />
     </div>
   )
 }
@@ -35,21 +35,24 @@ const Statistics = (props) => {
   if (props.all === 0) {
     return (
       <div>
-        <h2>{props.name}</h2>
         <p>No feedback given</p>
       </div>
     )
   }
   return (
     <div>
-      <h2>{props.name}</h2>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.all}</p>
-      <p>average {props.average}</p>
-      <p>positive {props.positive}%</p>
+      <StatisticLine name="good" value={props.good} />
+      <StatisticLine name="neutral" value={props.neutral} />
+      <StatisticLine name="bad" value={props.bad} />
+      <StatisticLine name="all" value={props.average} />
+      <StatisticLine name="positive" value={props.positive + '%'} />
     </div>
+  )
+}
+
+const StatisticLine = ({name, value}) => {
+  return (
+    <p>{name} {value}</p>
   )
 }
 
