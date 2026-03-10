@@ -17,7 +17,8 @@ const App = () => {
     
     let personToBeAdded = {
       name: newName,
-      number: newPhone
+      number: newPhone,
+      id: persons.length + 1
     }
     // console.log(personToBeAdded.name);
     
@@ -47,7 +48,7 @@ const App = () => {
     setSearch(searchText)
   }
 
-  const showFiltered = search ? persons.filter(person => person.name.includes(search)) : persons
+  const showFiltered = search ? persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase())) : persons
   
   return (
     <div>
