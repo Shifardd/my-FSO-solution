@@ -8,20 +8,27 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
+    let namesListed = persons.map(person => person.name)
+    
     let nameToBeAdded = {
       name: newName
     }
-    setPersons(persons.concat(nameToBeAdded))
-    setNewName('')
-    console.log('button clicked ',event.target);
+    // console.log(nameToBeAdded.name);
+    
+    if (namesListed.includes(nameToBeAdded.name)) {
+      alert(`${newName} is already added to phonebook`)
+    } else {
+      setPersons(persons.concat(nameToBeAdded))
+      setNewName('')
+    }
+    // console.log('button clicked ',event.target);
   }
 
   const handleNewName = (event) => {
     setNewName(event.target.value)
-    console.log(event.target.value);
+    // console.log(event.target.value);
   }
-
-  console.log(persons);
+  
   
 
   return (
