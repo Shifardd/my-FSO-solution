@@ -29,7 +29,16 @@ const App = () => {
     // console.log(personToBeAdded.name);
     
     if (namesListed.includes(personToBeAdded.name)) {
-      alert(`${newName} is already added to phonebook`)
+      let confirmIt = confirm(`${newName} is already added to phonebook, replace the old number to a new one?`)
+
+      if(confirmIt) {
+        let findThePerson = persons.find(person => person.name == newName)
+        
+        personService.update(findThePerson.id, personToBeAdded)
+        .then(returnedPersons => {
+          setPersons(persons.map(person => person.id == findThePerson.id ? returnedPersons : person))
+        })
+      }
     } else {
       personService.create(personToBeAdded)
       .then(returnedPerson => {
