@@ -32,9 +32,15 @@ const App = () => {
     if (namesListed.includes(personToBeAdded.name)) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat(personToBeAdded))
-      setNewName('')
-      setNewPhone('')
+      axios.post('http://localhost:3001/persons', personToBeAdded)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewPhone('')
+      })
+      // setPersons(persons.concat(personToBeAdded))
+      // setNewName('')
+      // setNewPhone('')
     }
     // console.log('button clicked ',event.target);
   }
