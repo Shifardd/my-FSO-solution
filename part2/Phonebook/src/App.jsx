@@ -59,7 +59,21 @@ const App = () => {
   }
 
   const showFiltered = search ? persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase())) : persons
-  
+
+
+  const deletePerson = (name, id) => {
+    let confirmation = confirm(`Delete ${name}`)
+    if(confirmation) {
+      personService.remove(id)
+      .then(removedPerson => {
+        setPersons(persons.filter(p => p.id !== removedPerson.id))
+      })
+    } else {
+      alert('Deletion cancelled');
+    }
+
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -67,7 +81,7 @@ const App = () => {
       <h3>Add a new</h3>
       <PersonForm onSubmit={addPerson} name={newName} handleName={handleNewName} number={newPhone} handleNumber={handleNewPhone} />
       <h2>Numbers</h2>
-      <Persons filtered={showFiltered}  />
+      <Persons key={persons.id} filtered={showFiltered} onClick={deletePerson} />
     </div>
   )
 }
