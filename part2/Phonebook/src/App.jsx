@@ -39,6 +39,13 @@ const App = () => {
         personService.update(findThePerson.id, personToBeAdded)
         .then(returnedPersons => {
           setPersons(persons.map(person => person.id == findThePerson.id ? returnedPersons : person))
+
+          setMessage(
+            `Updated ${returnedPersons.name}'s number`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000);
         })
       }
     } else {
