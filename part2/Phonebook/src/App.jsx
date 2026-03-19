@@ -11,6 +11,7 @@ const App = () => {
   const [newPhone, setNewPhone] = useState('')
   const [search, setSearch] = useState('')
   const [message, setMessage] = useState('You can add phonebook at the form below...')
+  const [color, setColor] = useState('white') 
 
   useEffect(() => {
     personService.getAll()
@@ -39,6 +40,7 @@ const App = () => {
         personService.update(findThePerson.id, personToBeAdded)
         .then(returnedPersons => {
           setPersons(persons.map(person => person.id == findThePerson.id ? returnedPersons : person))
+          setColor('green')
 
           setMessage(
             `Updated ${returnedPersons.name}'s number`
@@ -47,6 +49,17 @@ const App = () => {
             setMessage(null)
           }, 5000);
         })
+        .catch(error => {
+          setMessage(
+            `Information of ${personToBeAdded.name} has already been removed from server`
+          )
+          setPersons(persons.filter(person => person.id !== findThePerson.id))
+
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000);
+          setColor('red')
+        })
       }
     } else {
       personService.create(personToBeAdded)
@@ -54,6 +67,7 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewPhone('')
+        setColor('green')
 
         setMessage(
           `Added ${returnedPerson.name}`
@@ -102,7 +116,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification message={message} type={color} />
       <Filter value={search} onChange={handleSearch} />
       <h3>Add a new</h3>
       <PersonForm onSubmit={addPerson} name={newName} handleName={handleNewName} number={newPhone} handleNumber={handleNewPhone} />
