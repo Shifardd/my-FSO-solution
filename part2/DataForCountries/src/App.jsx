@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import List from "./components/List"
 
 const App = () => {
   const [value, setValue] = useState('')
@@ -19,17 +20,18 @@ const App = () => {
 
   let filtered = countries.filter(c => c.name.common.toLowerCase().includes(value.toLowerCase()))
 
-
   return (
     <div>
       find countries <input value={value} onChange={handleInput} />
-      <ul>
+      <div>
         {
-          filtered.map(c => c.name.common)
+          <List filtered={filtered} />
         }
-      </ul>
+      </div>
     </div>
   )
 }
+
+
 
 export default App 
