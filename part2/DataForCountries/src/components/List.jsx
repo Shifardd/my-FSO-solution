@@ -1,4 +1,4 @@
-const List = ({filtered}) => {
+const List = ({filtered, onClick}) => {
   if(filtered.length > 10) {
     return (
       <div>
@@ -24,7 +24,10 @@ const List = ({filtered}) => {
   }
 
   return (
-    filtered.map(country => <div>{country.name.common}</div>)
+    filtered.map(country => 
+    <div>
+      {country.name.common} <button onClick={() => onClick(country)}>Show</button>
+    </div>)
   )
 }
 
