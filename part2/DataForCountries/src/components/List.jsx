@@ -1,8 +1,4 @@
 const List = ({filtered}) => {
-  let flagStyle = {
-    fontSize: 200
-  }
-
   if(filtered.length > 10) {
     return (
       <div>
@@ -22,9 +18,8 @@ const List = ({filtered}) => {
         <ul> 
           {languages.map(lang => <li>{lang}</li>)}
         </ul>
-        <div style={flagStyle}>{filtered[0].flag}</div>
+        <img height="200" src={`${filtered[0].flags.svg}`} alt={`${filtered[0].flags.alt}`} />
       </>
-      
     )
   }
 
