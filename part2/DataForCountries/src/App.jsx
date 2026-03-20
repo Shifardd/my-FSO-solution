@@ -1,31 +1,40 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import List from "./components/List"
+import countriesService from './services/countries'
 
 const App = () => {
   const [value, setValue] = useState('')
-  const [countries, setCountries] = useState([])
+  const [countries, setCountries] = useState(null)
 
   useEffect(()=> {
-    axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
-    .then(response => {
-      setCountries(response.data)
-    })
-  },[])
+    if(!countries) {
+      countriesService.getAll()
+      .then(countries => setCountries(countries))
+    }
+  },[countries])
+
+  if(!countries) {
+    return null
+  }
 
   let handleInput = (event) => {
     let newValue = event.target.value
     setValue(newValue)
   }
 
-  let filtered = countries.filter(c => c.name.common.toLowerCase().includes(value.toLowerCase()))
+  let filtered = countries.filter(c => c.name.common.toLowerCase().includes(value.toLowerCase()))  
+
+  let showIt = (country) => {
+    setValue(country.name.common);    
+  }
+
 
   return (
     <div>
       find countries <input value={value} onChange={handleInput} />
       <div>
         {
-          <List filtered={filtered} />
+          <List filtered={filtered} onClick={showIt} />
         }
       </div>
     </div>
