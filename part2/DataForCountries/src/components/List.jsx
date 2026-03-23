@@ -1,4 +1,5 @@
-const List = ({filtered, onClick}) => {
+const List = ({filtered, onClick, data}) => {
+  
   if(filtered.length > 10) {
     return (
       <div>
@@ -7,26 +8,28 @@ const List = ({filtered, onClick}) => {
     )
   } 
   else if (filtered.length == 1) {
-    let languages = Object.values(filtered[0].languages)
+    if (data !== null && typeof data !== 'undefined') {
+      let languages = Object.values(data.languages)
+      return (
+        <>
+          <h1>{data.name}</h1>
+          <div>Capital {data.capital}</div>
+          <div>Area {data.area}</div>
+          <h2>Languages</h2>
+          <ul> 
+            {languages.map(lang => <li>{lang}</li>)}
+          </ul>
+          <img height="200" src={`${data.flags.svg}`} alt={`${data.flags.alt}`} />
+        </>
+      )
+    }
 
-    return (
-      <>
-        <h1>{filtered[0].name.common}</h1>
-        <div>Capital {filtered[0].capital}</div>
-        <div>Area {filtered[0].area}</div>
-        <h2>Languages</h2>
-        <ul> 
-          {languages.map(lang => <li>{lang}</li>)}
-        </ul>
-        <img height="200" src={`${filtered[0].flags.svg}`} alt={`${filtered[0].flags.alt}`} />
-      </>
-    )
   }
 
   return (
     filtered.map(country => 
     <div>
-      {country.name.common} <button onClick={() => onClick(country)}>Show</button>
+      {country} <button onClick={() => onClick(country)}>Show</button>
     </div>)
   )
 }
