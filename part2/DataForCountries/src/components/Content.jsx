@@ -21,7 +21,7 @@ const Content = ({filtered, onClick, data}) => {
           <About data={data} />
           <h2>Languages</h2>
           <Languages languages={languages} />
-          <Image src={data.flags.svg} alt={data.flags.alt} />
+          <Image height="200" src={data.flags.svg} alt={data.flags.alt} />
           <h2>Weather in {data.name}</h2>
           <Weather temp={data.temp} src={data.icon} alt={data.main} wind={data.wind} />
         </>
