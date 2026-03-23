@@ -34,8 +34,14 @@ const App = () => {
         let getWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&&units=metric&&appid=${api_key}`
         axios.get(getWeather)
         .then(response => {
+          console.log(response.data);
+          let icon = response.data.weather[0].icon
+          console.log(icon);
+          
           let weatherData = {
             temp: response.data.main.temp,
+            icon: `https://openweathermap.org/payload/api/media/file/${icon}.png`,
+            main: response.data.weather[0].main,
             wind: response.data.wind.speed
           }
           
