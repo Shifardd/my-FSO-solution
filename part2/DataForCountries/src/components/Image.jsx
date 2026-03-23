@@ -1,6 +1,6 @@
-const Image = ({src, alt}) => {
+const Image = ({height, src, alt}) => {
   return (
-    <img height="200" src={src} alt={alt} />
+    <img height={height} src={src} alt={alt} />
   )
 }
 
