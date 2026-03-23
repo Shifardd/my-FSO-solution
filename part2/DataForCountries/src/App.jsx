@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import List from "./components/List"
+import Content from "./components/Content"
 import countriesService from './services/countries'
 import weatherService from './services/weather'
 
@@ -84,7 +84,7 @@ const handleInput = (event) => {
       find countries <input value={value} onChange={handleInput} />
       <div>
         {
-          <List filtered={filtered} onClick={showIt} data={countryData} />
+          <Content filtered={filtered} onClick={showIt} data={countryData} />
         }
       </div>
     </div>
