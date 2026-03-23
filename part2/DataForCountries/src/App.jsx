@@ -10,23 +10,23 @@ const App = () => {
   const [listOfCountries, setListOfCountries] = useState([]) 
 
   useEffect(() => {
-    axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
-    .then(response => {
-      let countries = response.data.map(country => country.name.common)
+    countriesService.getAll()
+    .then(allCountries => {
+      let countries = allCountries.map(country => country.name.common)
       setListOfCountries(countries)
     })
   }, [])  // list of countries name
 
   useEffect(()=> {
     if(country) {
-      axios.get(`https://studies.cs.helsinki.fi/restcountries/api/name/${country}`)
-      .then(response => {
+      countriesService.getSpecific(country)
+      .then(returnedData => {
         let dataObject = {
-          name: response.data.name.common,
-          capital: response.data.capital[0],
-          area: response.data.area,
-          languages: response.data.languages,
-          flags: response.data.flags
+          name: returnedData.name.common,
+          capital: returnedData.capital[0],
+          area: returnedData.area,
+          languages: returnedData.languages,
+          flags: returnedData.flags
         }
         setCountryData(dataObject)
       })
