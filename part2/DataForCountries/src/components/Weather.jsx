@@ -4,7 +4,7 @@ const Weather = ({temp, src, alt, wind}) => {
   return (
     <div>
       <p>Temperature {temp} Celsius</p>
-      <Image src={src} alt={alt} />
+      <Image height="100" src={src} alt={alt} />
       <p>Wind {wind} m/s</p>
     </div>
   )
