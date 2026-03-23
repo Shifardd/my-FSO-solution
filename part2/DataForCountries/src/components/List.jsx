@@ -20,6 +20,9 @@ const List = ({filtered, onClick, data}) => {
             {languages.map(lang => <li>{lang}</li>)}
           </ul>
           <img height="200" src={`${data.flags.svg}`} alt={`${data.flags.alt}`} />
+          <h2>Weather in {data.name}</h2>
+          <p>Temperature {data.temp} Celsius</p>
+          <p>Wind {data.wind} m/s</p>
         </>
       )
     }
