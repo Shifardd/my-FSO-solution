@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import List from "./components/List"
 import countriesService from './services/countries'
-import axios from "axios"
 
 const App = () => {
   const [value, setValue] = useState('')
