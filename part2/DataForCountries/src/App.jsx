@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import List from "./components/List"
 import countriesService from './services/countries'
+import axios from "axios"
 
 const App = () => {
   const [value, setValue] = useState('')
@@ -27,7 +28,20 @@ const App = () => {
           languages: returnedData.languages,
           flags: returnedData.flags
         }
-        setCountryData(dataObject)
+
+        let api_key = import.meta.env.VITE_API_KEY
+        let [lat, long] = returnedData.latlng
+        let getWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&&units=metric&&appid=${api_key}`
+        axios.get(getWeather)
+        .then(response => {
+          let weatherData = {
+            temp: response.data.main.temp,
+            wind: response.data.wind.speed
+          }
+          
+          setCountryData({...dataObject, ...weatherData})
+        })
+
       })
     }
   },[country])  // For country data
@@ -52,7 +66,6 @@ const handleInput = (event) => {
 }
 
 
-
   let filtered = listOfCountries.filter(c => {
     return c.toLowerCase().includes(value.toLowerCase())
   })   // filter name of country
@@ -74,7 +87,5 @@ const handleInput = (event) => {
     </div>
   )  
 }
-
-
 
 export default App
