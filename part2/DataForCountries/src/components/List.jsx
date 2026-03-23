@@ -22,6 +22,7 @@ const List = ({filtered, onClick, data}) => {
           <img height="200" src={`${data.flags.svg}`} alt={`${data.flags.alt}`} />
           <h2>Weather in {data.name}</h2>
           <p>Temperature {data.temp} Celsius</p>
+          <img src={data.icon} alt={data.main} />
           <p>Wind {data.wind} m/s</p>
         </>
       )
