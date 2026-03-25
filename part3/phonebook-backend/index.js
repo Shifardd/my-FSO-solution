@@ -64,6 +64,13 @@ const generateId = () => {
 
 app.post('/api/persons', (req, res) => {
   const body = req.body
+  
+  if (!body.name || !body.number) {
+    return res.status(400).json({
+      error: 'name or number is missing'
+    })
+  }
+
   const newPerson = {
     name: body.name,
     number: body.number,
