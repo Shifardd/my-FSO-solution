@@ -1,3 +1,4 @@
+
 const express = require('express')
 
 const app = express()
@@ -31,6 +32,13 @@ app.get('/', (req, res) => {
 
 app.get('/api/persons', (req, res) => {
   res.json(data)
+})
+
+app.get('/info', (req, res) => {
+  const date = new Date().toString()
+  res.send(`<p>Phonebook has info for ${data.length} people </p>
+    <p> ${date}</p>`)
+  
 })
 
 
