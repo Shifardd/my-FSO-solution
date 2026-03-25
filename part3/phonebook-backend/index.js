@@ -43,7 +43,12 @@ app.get('/info', (req, res) => {
 app.get('/api/persons/:id', (req, res) => {
   const id = req.params.id
   const person = data.find(p => p.id === id)
-  res.json(person)
+  if(person) {
+    res.json(person)
+  } else {
+    res.status(404).end()
+  }
+  
 })
 
 const PORT = 3001
