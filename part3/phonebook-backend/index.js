@@ -38,9 +38,13 @@ app.get('/info', (req, res) => {
   const date = new Date().toString()
   res.send(`<p>Phonebook has info for ${data.length} people </p>
     <p> ${date}</p>`)
-  
 })
 
+app.get('/api/persons/:id', (req, res) => {
+  const id = req.params.id
+  const person = data.find(p => p.id === id)
+  res.json(person)
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
