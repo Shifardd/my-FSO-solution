@@ -70,6 +70,12 @@ app.post('/api/persons', (req, res) => {
       error: 'name or number is missing'
     })
   }
+  let allNames = data.map(person => person.name)
+  if(allNames.includes(body.name)) {
+    return res.status(400).json({
+      error: 'name must be unique'
+    })
+  }
 
   const newPerson = {
     name: body.name,
