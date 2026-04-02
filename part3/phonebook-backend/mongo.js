@@ -13,27 +13,28 @@ mongoose.set("strictQuery", false)
 
 mongoose.connect(url, {family: 4})
 
-const phoneSchema = new mongoose.Schema({
+const personSchema = new mongoose.Schema({
   name: String,
   number: String
 })
 
-const Phone = mongoose.model('Phone', phoneSchema)
+const Person = mongoose.model('Person', personSchema)
 
-const phone = new Phone({
+const person = new Person({
   name: process.argv[3],
   number: process.argv[4]
 })
 
-if(process.argv.length == 5) {
-  phone.save().then(result => {
+if(process.argv.length === 5) {
+  person.save().then(result => {
     console.log(`added ${process.argv[3]} number ${process.argv[4]} to phonebook`);
     mongoose.connection.close()
   })
-} else if(process.argv.length == 3) {
-  Phone.find({}).then(result => {
+} else if(process.argv.length === 3) {
+  Person.find({}).then(result => {
+    console.log("phonebook:");
     result.forEach(person => {
-      console.log(person);
+      console.log(`${person.name} ${person.number}`);
     });
     mongoose.connection.close()
   })
