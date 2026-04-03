@@ -1,0 +1,6 @@
+[submodule "part3/Phonebook/phonebook-backend"]
+	path = part3/Phonebook/phonebook-backend
+	url = https://github.com/Shifardd/phonebook
+[submodule "part3/Phonebook/phonebook-frontend"]
+	path = part3/Phonebook/phonebook-frontend
+	url = https://github.com/Shifardd/phonebook-frontend
