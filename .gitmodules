@@ -4,3 +4,6 @@
 [submodule "part3/Phonebook/phonebook-frontend"]
 	path = part3/Phonebook/phonebook-frontend
 	url = https://github.com/Shifardd/phonebook-frontend
+[submodule "part4/Blog-List"]
+	path = part4/Blog-List
+	url = https://github.com/Shifardd/Blog-List
