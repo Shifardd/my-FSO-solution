@@ -3,12 +3,16 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+import Message from './components/Message'
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [message, setMessage] = useState(null)
+  const [color, setColor] = useState('')
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -40,6 +44,11 @@ const App = () => {
       setPassword('')
     } catch {
       console.log('Wrong credentials');
+      setColor('red')
+      setMessage('wrong username or password')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
     }
   }
 
@@ -62,11 +71,17 @@ const App = () => {
     setTitle('')
     setAuthor('')
     setUrl('')
+    setColor('green')
+    setMessage(`a new blog ${blog.title} by ${blog.author} added`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000);
   }
 
   const loginForm = () => (
     <div>
       <h2>log in to application</h2>
+      <Message message={message} color={color} />
       <form onSubmit={handleLogin}>
         <div>
           <label>
@@ -141,6 +156,7 @@ const App = () => {
       {user && (
         <div>
           <h2>blogs</h2>
+          <Message message={message} color={color} />
           <p>
             {user.name || user.username} logged in
             <button onClick={handleLogout}>logout</button>
